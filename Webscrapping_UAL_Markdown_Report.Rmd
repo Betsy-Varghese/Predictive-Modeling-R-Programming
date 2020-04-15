@@ -1,0 +1,342 @@
+---
+title: "Social Media Analytics Group Project"
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+date: "2/6/2020"
+---
+Group Members
+* Natali Gzraryan
+* Eduardo Razo
+* Betsy Varghese
+
+```{r packages, include=FALSE}
+for (i in c('knitr', 'tinytex')){
+  if (!require(i, character.only=TRUE)) install.packages(i, repos = "http://cran.us.r-project.org")
+  require(i, character.only=TRUE)
+}
+```
+
+```{r packages, include=FALSE}
+if (FALSE) {
+library(rmarkdown)
+
+# simple invocation
+render("Markdown.Rmd", pdf_document())
+
+# specify an option for latex engine
+render("input.Rmd", pdf_document(latex_engine = "lualatex"))
+}
+
+```
+
+<center>
+```{r picture, echo=FALSE, out.width = '20%'}
+#install.packages("knitr")
+#library(knitr)
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/united_logo.png")
+```
+</center>
+
+## **About United Airlines**
+
+United Airlines, Inc. is a major American airline headquartered at Willis Tower in Chicago, Illinois. The main operations of the company include transporting people and cargo throughout North America and to destinations in Asia, Europe, the Middle East and Latin America. 
+
+United Airlines will hereafter be referred to as UAL in the report
+
+
+## **Project Objectives**
+
+1. To analyse the tweet patterns of UAL
+2. To analyse the tweet mentions of the company
+3. To guage the United customer sentiment about UAL in the market
+4. To understand and anlyse what is being spoken about the company in the society
+
+## **Project Methodology**
+
+####  **1. Downloading Data for Company Tweets**
+ 
+* UAL is not an active twitter user. Using the search_fullarchive function to collect tweets for the year 2019 gave us very poor results. It resulted in only 200 odd tweets. This was also due to some of the request limitations of the search_fullarchive option.
+* We therefore decided to use the get_timeline function.
+* Since the get_timeline function allows for download of tweets only for the last 30 days. We were able to extract UAL tweets only for 2020. 
+
+####  **2. Downloading twitter mentions for the company**
+
+* Initially we tried downloading the company mentions using the get_timeline function but in the last month there were only 2000 - 3000 comapny mentions.
+* We therefore decided to use the full archive option instead. 
+* In addition to getting a larger data set of tweets, it would also allow us to analyse the company mentions over a longer period of time to draw insightful conclusions.
+* Our final tweet mentions data set consists of 15,065 observations.
+
+## **Company Tweet Analysis**
+
+####  **1. Analysing type of tweets**
+
+* The distribution of the company tweets were observed to be fairly skewed. 
+* Most of the UAL tweets were found to be replies while only a meagre 0.19% of their tweets were organic i.e. their direct communication with their followers.
+* Since they have a very limited number of tweets, it only justified that there are no retweets observed.
+
+<center>
+```{r UAL_type_tweet, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/UAL_type_tweet.png")
+```
+</center>
+
+####  **2. Distribution of Tweet Source **
+
+* Most of the tweets originated from a source called "Lithium Technologies".
+* Further research on Lithium Technologies revealed that they are a San Francisco-based provider of software that allows businesses to connect with their customers on social media and digital channels.
+* They provide customer support to their clients i.e. handle their client interactions.
+
+<center>
+```{r tweet_source, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/UAL_source.png")
+```
+</center>
+ 
+
+####  **3. Analysing the tweet timeline**
+
+* Observing the frequency of UAL across the last one month gave us the following results
+
+<center>
+```{r timeline, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/try1.png")
+```
+</center>
+
+* Since almost all the tweets by UAL are respones this graph can be viewed as the frequency of UAL responses.
+* Checking the dates mentioned in the graph against the days of the week revealed that the repsonses were the highest between Friday and Monday.
+* The lowest response days were observed to be on Tuesdays.
+* Since UAL outsources their customer support/client interaction work to Lithium Technologies. The response timeline therefore may be in line with the working schedule of the Lithium Technolgies. 
+
+####  **4. Most recurring words in UAL tweets**
+
+* The top two most frequent words amongst UAL tweets were observed to be "travel" and "china".
+* Associating it to the real world, we reasoned out that these were the tweets in response to the "Coronavirus" outbreak and the cancellation of UAL flights to and from China.
+
+<center>
+```{r UAL_frequent, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/UAL_frequent.png")
+```
+</center>
+
+####  **5. Word Cloud for UAL tweets**
+
+<center>
+```{r UAL_cloud, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/UAL_cloud.png")
+```
+</center>
+
+* Occurrence of #groundhogday in the tweets was linked to a delay of UAL flights on the groundhog day (Feb 2, 2020) in America
+* #mileonamisson is a reference to the UAL crowdsourcing platform which gives customers a simple way to donate miles to NGOs and other charities in need of air transportation
+* #cei2020 refers to UAL's scoring on the Corporate Equality Index 
+* #dollypartonchallenge refers to the instagram trend started by Dolly Parton which icludes a photo compilation of four "versions" of herself—which were represented by LinkedIn, Facebook, Instagram, and Tinder
+
+####  **6. Sentiments reflected by UAL tweets**
+
+<center>
+```{r UAL_sentiment, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/UAL_sentiment.png")
+```
+</center>
+
+* In line with our hypothesis, positivity was the sentiment that was most highly reflected in UAL tweets
+* This is logical because UAL would mention only positive things about themselves in their tweets (e.g. problems they've solved, efficiency in service, etc.) even if it is a reply to a negative client tweet.
+
+## **Analysis of Tweets with UAL mentions**
+
+Users refer to twitter users that mention UAL in their tweets
+
+####  **1. Geographical Distributions of Users**
+
+* As seen in the map below, the users are distributed all across the globe as UAL has active flight operations across these regions.
+
+<center>
+```{r map, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/map.png")
+```
+</center>
+
+####  **2. Language Distributions of Users**
+
+* As can be seen by the graph, the a majority of the tweets are in ENglish. There are also some spanish and japanese tweets present in the dataset
+* FOr all other analyses we have used out only the English tweets. 
+
+<center>
+```{r lang, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/lang.png")
+```
+</center>
+
+####  **3. Distribution by type of tweet**
+
+* A majority of user tweets were retweets while only half of them were original tweets
+
+<center>
+```{r user_type, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/User_type.png")
+```
+</center>
+
+####  **3. Influencer Analysis**
+
+* Separate analysis were done on the user basis. Additional research showed that people who has more than or equal to 2,000 followers are considered Influencers. We wanted to see which kind of tweets the influencers are posting. As it is seen from, the barplot Out of the users that have at least 2000 followers the majority wrote positive tweets.
+
+<center>
+```{r influence, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/influencer.png")
+```
+</center>
+
+
+* Another hypothesis was generated that the influencers or at least some proportion are being paid for good tweets. 
+* This pie chart show which percent of influencers (users having at least 2000 followers) that posted positive tweets were also the friends (United Airline follows)  of the United Airline. The analysis showed that almost 1 percent of the total are users that are friends of the United Airline. Even if the percentage is considered a small number but around 4 influencers had a connection with a company, which is a usual number of influencers that are being paid per a single company.
+
+<center>
+```{r pie, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/pie.png")
+```
+</center>
+
+* Follwing is the list of four users who were also amongst UAL's friends list. Which could mean that these are influencers that UAL has hired for their brand promotion.  
+
+<center>
+```{r UAL_influencers, echo=FALSE, out.width = '80%'}
+#install.packages("knitr")
+#library(knitr)
+load("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/influencers_friends.Rdata")
+head(influencers_friends, 5)
+```
+</center>
+
+####  **4. Distribution of Users tweets by Month**
+
+* The graph represents the distribution of tweets where United Airline was mentioned (2019) by months. It is easily visible that during more touristic season (from June to October) the negative sentiment arises which confirms our overall finding that the company has some issues with delayed flights and customer service.
+
+<center>
+```{r month, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/UAL_day.png")
+```
+</center>
+
+####  **6. Text Width Analysis**
+
+* The graph represents the connection of the text display width variable and the sentiment of the tweets. The preliminary hypothesis was that there is an inverse connection between those two as the negative texts tent to be longer. The hypothesis was confirmed with the finding in the graph as the green line that represents text width has the same pattern as the red line that represents sentiment value.
+
+<center>
+```{r width, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/User_text.png")
+```
+</center>
+
+####  **7. Dictionary Analysis**
+
+*	The figure below shows the analysis based on nrc dictionary which assigns values to the words grouping them by emotions. The ironic finding of this figure is that the most frequent emotion here is the positive one although we did the lemmatization and took into account the negation words. One explanation of this finding could be that, lot’s of sarcasm was used in the tweets ( example: The best service ever due to the delay stayed in the airport for more than 10 hours). The use of sarcasm and irony in our case lead to a bit biased results.
+
+<center>
+```{r sentiment, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/User_sentiment.png")
+```
+</center>
+
+####  **8. Word Frequency Analysis**
+
+* The figure below represents the words that were used more than 800 times in total. An important notice is that the words line unitedairline ,flight, airlines were eliminated from the analysis. An interesting fact about this figure Is that the delay is one of the most frequent word which is not the best one for the airline. The same was shown through the wordcloud.
+
+<center>
+```{r freq, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/User_cloud.png")
+```
+</center>
+
+####  **9. Stock Price Analysis**
+
+* While doing the overall United airline’s tweets analysis we thought of interesting connection between the sentiment of the tweets associated with the company and their stock prices. Firstly we thought of implementing tile series analysis for predicting future stock price, but the basic the basic analysis like scatterplot or correlations which are present in our code showed that in reality there is not connection between the those two variables. Additionally after grouping the data by day we have just around 200 observations which is not enough for time series analysis.
+
+<center>
+```{r stocks, echo=FALSE, out.width = '80%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/User_timeline.png")
+```
+</center>
+
+####  **10. Word cloud for Users Data**
+
+<center>
+```{r cloud, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/cloud.png")
+```
+</center>
+
+## **Topic Modelling**
+
+We used the following methods to find the optimum value of k (the numbers of topics to be used for creating the LDA model)
+* LDA Tuning 
+* Coherence Method
+* Perplexity 
+* Log Likelihood using 5-fold cross validation 
+
+####  **1. LDA Tuning**
+
+* The graph shows four parameters two to be minimised (CaoJuan and Arun) and two to be maximised (Griffiths and Deveaud)
+* However, in this case CaoJuan and Deveaud are not very informative 
+* By looking at the other two we see that optimum k lies close to 30
+
+<center>
+```{r tuning, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/lda_tuning.png")
+```
+</center>
+
+
+####  **2. Coherence Method**
+
+* We ran 30 models and evaluated them based on their coherence (which tries to portary how coherent are the wordsin the topics amongst each model i.e. evaluates whether they make sense when put together)
+* In our case the model with the best coherence turns out to be the one with 29 topics in it. 
+* This result therefore reinforces and re-affirms the result obtained by the LDA tuning method  
+
+<center>
+```{r coherence, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/coherence.png")
+```
+</center>
+
+* We also created a cluster dendogram to see which of the topics were closely related to one another
+* The most closely related topics turn out to be topics 4 and 17
+
+<center>
+```{r dendo, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/dendo.png")
+```
+</center>
+
+####  **3. 5 fold validatio for different values of k**
+
+* After running a 5 fold validation for different values of k the optimum  was yet again achieved at k = 29. Shown by evaluation of teh log likelihhod of the models
+
+<center>
+```{r log, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/cross_likeli.png")
+```
+</center>
+
+####  **4. Results**
+
+* Final Topics
+
+<center>
+```{r full, echo=FALSE, out.width = '100%'}
+knitr::include_graphics("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/markdown images/full.png")
+```
+</center>
+
+<center>
+```{r results, echo=FALSE, out.width = '100%'}
+#install.packages("knitr")
+#library(knitr)
+load("C:/Users/bvarghese/Desktop/IESEG Slides/Social_Media_Matthijs/Group Project/top_10_terms.Rdata")
+head(top_10_terms, 10)
+```
+</center>
+
